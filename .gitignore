@@ -5,3 +5,4 @@ Thumbs.db
 # Defold
 /.internal
 /build
+/.vscode

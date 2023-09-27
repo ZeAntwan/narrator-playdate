@@ -1,7 +1,7 @@
 {
     "playdate-debug.outputPath": "build/",
     "playdate-debug.productName": "Narrator",
-    "playdate-debug.sourcePath": "./",
+    "playdate-debug.sourcePath": "./example",
     
     "Lua.runtime.version": "Lua 5.4",
     "Lua.diagnostics.disable": ["undefined-global", "lowercase-global"],
