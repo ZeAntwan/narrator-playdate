@@ -1,2 +1,0 @@
-Hello, world! I am a string.
-A line after a line

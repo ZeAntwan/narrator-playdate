@@ -47,6 +47,9 @@ import "narrator/narrator"
 -- local book = narrator.parse_file('stories.game', { save = true })
 
 -- Imports the pre parsed book and init a story from it
+-- Note: the "import" method actually returns the script imported, but has to be at the start of a line. So adding a line break is a workaround
+-- See https://devforum.play.date/t/a-list-of-helpful-libraries-and-code/221/43
+local book =
 import "stories/game"
 
 local story = narrator.init_story(book)

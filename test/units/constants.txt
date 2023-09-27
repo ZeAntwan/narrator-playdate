@@ -1,4 +1,0 @@
-This is the string constant. One is 1. Zero is 0.
-The secret agent moves forward.
-The secret agent moves forward.
-The secret agent grabs the suitcase!

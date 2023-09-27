@@ -1,1 +1,0 @@
-The \| dark \{grass\} is soft under your feet.

@@ -3,7 +3,7 @@
 --
 
 -- Dependencies
-import "narrator/narrator"
+import "../narrator/narrator"
 
 -- Parse a book from the Ink file and save as module 'stories.game.lua'
 -- local book = narrator.parse_file('stories.game', { save = true })
