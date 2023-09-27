@@ -1,9 +1,12 @@
 ![logo](https://user-images.githubusercontent.com/4752473/85455900-141f8f80-b5a7-11ea-8cd7-b441d662b361.png)
 
 # Narrator
-
-[![Release](https://img.shields.io/github/v/release/astrochili/narrator.svg?include_prereleases=&sort=semver&color=blue)](https://github.com/astrochili/narrator/releases)
+[![Release](https://img.shields.io/github/v/release/zeantwan/narrator-playdate.svg?include_prereleases=&sort=semver&color=blue)](https://github.com/astrochili/narrator/releases)
 [![License](https://img.shields.io/badge/License-MIT-blue)](https://github.com/astrochili/narrator/blob/master/LICENSE)
+[![Toybox Compatible](https://img.shields.io/badge/toybox.py-compatible-brightgreen)](https://toyboxpy.io)
+
+Original Repo
+
 [![Website](https://img.shields.io/badge/website-gray.svg?&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxNiIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDE4IDE2Ij48Y2lyY2xlIGN4PSIzLjY2IiBjeT0iMTQuNzUiIHI9IjEuMjUiIGZpbGw9InVybCgjYSkiLz48Y2lyY2xlIGN4PSI4LjY2IiBjeT0iMTQuNzUiIHI9IjEuMjUiIGZpbGw9InVybCgjYikiLz48Y2lyY2xlIGN4PSIxMy42NSIgY3k9IjE0Ljc1IiByPSIxLjI1IiBmaWxsPSJ1cmwoI2MpIi8+PHBhdGggZmlsbD0idXJsKCNkKSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNy42MyAxLjQ4Yy41LS43IDEuNTUtLjcgMi4wNSAwbDYuMjIgOC44MWMuNTguODMtLjAxIDEuOTctMS4wMyAxLjk3SDIuNDRhMS4yNSAxLjI1IDAgMCAxLTEuMDItMS45N2w2LjIxLTguODFaIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImEiIHgxPSIyLjQxIiB4Mj0iMi40MSIgeTE9IjEzLjUiIHkyPSIxNiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIHN0b3AtY29sb3I9IiNGRDhENDIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNGOTU0MUYiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iYiIgeDE9IjcuNDEiIHgyPSI3LjQxIiB5MT0iMTMuNSIgeTI9IjE2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agc3RvcC1jb2xvcj0iI0ZEOEQ0MiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0Y5NTQxRiIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJjIiB4MT0iMTIuNCIgeDI9IjEyLjQiIHkxPSIxMy41IiB5Mj0iMTYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBzdG9wLWNvbG9yPSIjRkQ4RDQyIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjRjk1NDFGIi8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImQiIHgxPSIuMDMiIHgyPSIuMDMiIHkxPSIuMDMiIHkyPSIxMi4yNiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIHN0b3AtY29sb3I9IiNGRkU2NUUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNGRkM4MzAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48L3N2Zz4=)](https://astronachos.com/)
 [![Mastodon](https://img.shields.io/badge/mastodon-gray?&logo=mastodon)](https://mastodon.gamedev.place/@astronachos)
 [![Twitter](https://img.shields.io/badge/twitter-gray?&logo=twitter)](https://twitter.com/astronachos)
@@ -12,7 +15,7 @@
 
 ## Overview
 
-The [Ink](https://www.inklestudios.com/ink/) language parser and runtime implementation in Lua.
+The [Ink](https://www.inklestudios.com/ink/) language parser and runtime implementation in Lua. **But adapted to work on Playdate !**
 
 Ink is a powerful narrative scripting language. You can find more information about how to write Ink scripts [here](https://github.com/inkle/ink/blob/master/Documentation/WritingWithInk.md). There is also [Inky](https://github.com/inkle/inky) editor with useful features to test and debug Ink scripts.
 
@@ -21,53 +24,90 @@ Narrator allows to convert raw Ink scripts to the book (a lua table) and play it
 - 📖 A book is a passive model on the shelf like a game level.
 - ✨ A story is a runtime state of the book reading like a game process.
 
-## Quick example
+## ⚠ Notes on "Parsing"
+
+Due to Playdate Hardware limitation (and also my own technical limitations), the Playdate or Playdate Simulator cannot parse an Ink file using lpeg.
+
+For this library to work, you will need to parse and output the file in another way.
+
+This repo contains a basic Defold project that can do that for you, but you can also create a very simple lua script using the original repo using this
 
 ```lua
 local narrator = require('narrator.narrator')
+-- Parse a Ink file at path 'stories/game.ink'
+-- and save the book at path 'stories/game.lua'
+local book = narrator.parse_file('stories.game', { save = true })
+```
 
--- Parse a book from the Ink file.
-local book = narrator.parse_file('stories.game')
+## Quick example
+```lua
+import "narrator/narrator"
 
--- Init a story from the book
+-- Parse a book from the Ink file and save as module 'stories.game.lua'
+-- local book = narrator.parse_file('stories.game', { save = true })
+
+-- Imports the pre parsed book and init a story from it
+import "stories/game"
+
 local story = narrator.init_story(book)
 
 -- Begin the story
 story:begin()
 
-while story:can_continue() do
+print('--- Game started ---\n')
 
-  -- Get current paragraphs to output
-  local paragraphs = story:continue()
+local wait_for_input = false
 
-  for _, paragraph in ipairs(paragraphs) do
-    local text = paragraph.text
-
-    -- You can handle tags as you like, but we attach them to text here.
-    if paragraph.tags then
-      text = text .. ' #' .. table.concat(paragraph.tags, ' #')
+function playdate.update()
+  
+  if story:can_continue() then
+    -- Get current paragraphs to output
+    local paragraphs = story:continue()
+  
+    for _, paragraph in ipairs(paragraphs) do
+      local text = paragraph.text
+  
+      -- You can handle tags as you like, but we attach them to text here.
+      if paragraph.tags then
+        text = text .. ' #' .. table.concat(paragraph.tags, ' #')
+      end
+  
+      -- Output text to the player
+      print(text)
     end
-
-    -- Output text to the player
-    print(text)
   end
 
   -- If there is no choice it seems like the game is over
-  if not story:can_choose() then break end
-
-  -- Get available choices and output them to the player
-  local choices = story:get_choices()
-  for i, choice in ipairs(choices) do
-    print(i .. ') ' .. choice.text)
+  if story:can_choose() and not wait_for_input then
+    -- Get available choices and output them to the player
+    local choices = story:get_choices()
+    for i, choice in ipairs(choices) do
+      print(i .. ') ' .. choice.text)
+    end
+    wait_for_input = true
   end
 
-  -- Read the choice from the player input
-  local answer = tonumber(io.read())
 
-  -- Send answer to the story to generate new paragraphs
-  story:choose(answer)
+  if not story:can_continue() and not story:can_choose() and not wait_for_input then
+    print('\n--- Game over ---')
+    wait_for_input = true
+  end
+
+end
+
+function playdate.keyPressed(key)
+  -- Read the choice from the player input
+  choice = tostring(key)
+  print(choice)
+  if choice:find('[%d]') then
+    -- Send answer to the story to generate new paragraphs
+    story:choose(tonumber(key))
+    wait_for_input = false
+  end
+
 end
 ```
+
 
 ## Features
 
@@ -88,6 +128,7 @@ end
 - [x] Game queries: all the queries without `TURNS()` and `TURNS_SINCE()```
 - [x] State: saving and loading
 - [x] Integration: external functions, variables observing, jumping
+  - External function are still executed internally
 - [x] Migration: the ability to implement the migration of player's saves after the book update
 - [x] Internal functions
 
@@ -97,6 +138,8 @@ end
 - [ ] Divert target as variable type
 - [ ] Assigning string evaluations to variables
 - [ ] Multiple parallel flows
+- [ ] Line by line evaluation
+  - You can output a paragraph line by line, but all of the function it contains will have already been processed
 
 ### Known limitations
 
@@ -106,84 +149,24 @@ end
 - A list uses only standard numerical values `1, 2, 3...`. Can't define your own numerical values like `4, 7, 12...`.
 - A comment in the middle of the paragraph `before /* comment */ and after` splits it into two paragraphs `before` and `and after```
 
-## Alternatives
-
-- [defold-ink](https://github.com/abadonna/defold-ink) — The Ink language runtime implementation in Lua based on parsing compiled JSON files.
-
 ## Showcase
 
-- [Cat's Day](https://astronachos.com/catsday/) — A short card game about one furry.
+- *Soon*
 
 ## Installation
 
-### Common case (Löve, pure Lua, etc.)
+### Toybox.py
 
-Download the latest [release archive](https://github.com/astrochili/narrator/releases) and require the `narrator` module.
+### Manual
 
-```lua
-local narrator = require('narrator.narrator')
-```
+### Parsing the ink file
+Because of the Playdate limitation, and also to save on memory cost, you have to process the ink file into a lua table outside of the playdate environement.
 
-Narrator requires [lpeg](http://www.inf.puc-rio.br/~roberto/lpeg/) as dependency to parse Ink content. You can install it with [luarocks](https://luarocks.org/).
+For now, I have included a defold project that when opened and run will convert and output a lua file for you to drop in
 
-```shell
-$ luarocks install lpeg
-```
-
-In fact, you don't need `lpeg` in the release, but you need it locally to parse Ink content and generate lua versions of books to play in your game. Use parsing in development only, prefer already parsed and stored books in production.
-
-### Defold
-
-Add links to the zip-archives of the latest versions of [narrator](https://github.com/astrochili/narrator/releases) and [defold-lpeg](https://github.com/astrochili/defold-lpeg/releases) to your Defold project as [dependencies](http://www.defold.com/manuals/libraries/).
-
-```
-https://github.com/astrochili/narrator/archive/master.zip
-https://github.com/astrochili/defold-lpeg/archive/master.zip
-```
-
-Then you can require the `narrator` module.
-
-```lua
-local narrator = require('narrator.narrator')
-```
+Feel free to suggest a better script that could make that process hassle free
 
 ## Documentation
-
-### narrator.parse_file(path, params)
-
-Parses the Ink file at path with all the inclusions and returns a book instance. Path notations `'stories/game.ink'`, `'stories/game'` and `'stories.game'` are valid.
-
-You can save a parsed book to the lua file with the same path by passing `{ save = true }` as `params` table. By default, the `params` table is `{ save = false }`.
-
-```lua
--- Parse a Ink file at path 'stories/game.ink'
-local book = narrator.parse_file('stories.game')
-
--- Parse a Ink file at path 'stories/game.ink'
--- and save the book at path 'stories/game.lua'
-local book = narrator.parse_file('stories.game', { save = true })
-```
-Reading and saving files required `io` so if you can't work with files by this way use `narrator.parse_content()`.
-
-### narrator.parse_content(content, inclusions)
-
-Parses the string with Ink content and returns a book instance. The `inclusions` param is optional and can be used to pass an array of strings with Ink content of inclusions.
-
-```lua
-local content = 'Content of a root Ink file'
-local inclusions = {
-  'Content of an included Ink file',
-  'Content of another included Ink file'
-}
-
--- Parse a string with Ink content
-local book = narrator.parse_content(content)
-
--- Parse a string with Ink content and inclusions
-local book = narrator.parse_content(content, inclusions)
-```
-
-Content parsing is useful when you should manage files by your engine environment and don't want to use `io` module. For example, in Defold, you may want to load ink files as custom resources with [sys.load_resource()](https://defold.com/ref/sys/#sys.load_resource:filename).
 
 ### narrator.init_story(book)
 

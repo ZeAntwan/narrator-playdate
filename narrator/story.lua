@@ -1,10 +1,14 @@
 --
 -- Dependencies
 
-local classic = require('narrator.libs.classic')
-local lume = require('narrator.libs.lume')
-local enums = require('narrator.enums')
-local list_mt = require('narrator.list.mt')
+--local classic = require('narrator.libs.classic')
+import 'libs/classic'
+--local lume = require('narrator.libs.lume')
+import 'libs/lume'
+--local NarratorEnums = require('narrator.NarratorEnums')
+import 'enums'
+--local list_mt = require('narrator.list.mt')
+import 'list/mt'
 
 --
 -- Story
@@ -33,21 +37,20 @@ local list_mt = require('narrator.list.mt')
 ---@field private stack any
 ---@field private debug_seed any
 ---@field private return_value any
-local story = classic:extend()
-
+class('story').extends(NarratorObject)
 --
 -- Initialization
 
 ---@private
 ---@param book Narrator.Book
-function story:new(book)
+function story:init(book)
   self.tree = book.tree
   self.constants = book.constants
   self.variables = lume.clone(book.variables)
   self.lists = book.lists
   self.params = book.params
 
-  self.list_mt = list_mt
+  self.list_mt = mt
   self.list_mt.lists = self.lists
 
   self.version = book.constants.version or 0
@@ -285,6 +288,15 @@ function story:bind(func_name, handler)
   self.functions[func_name] = handler
 end
 
+function story:execute_function(funcName, ...)
+	local t = self.functions[funcName]
+	if t then
+		for _, v in ipairs(t) do
+			v.fn(...)
+		end
+	end
+end
+
 --
 -- Private
 
@@ -414,7 +426,7 @@ function story:read_items(items, path, depth, mode, current_index)
   local chain = path.chain or { }
   local depth = depth or 0
   local deep_index = chain[depth + 1]
-  local mode = mode or enums.read_mode.text
+  local mode = mode or NarratorEnums.read_mode.text
 
   -- Deep path factory
 
@@ -452,31 +464,31 @@ function story:read_items(items, path, depth, mode, current_index)
 
     if item.return_value then
       self.return_value = tostring(item.return_value)
-      return enums.read_mode.quit
+      return NarratorEnums.read_mode.quit
     end
 
-    local item_type = enums.item.text
+    local item_type = NarratorEnums.item.text
 
     if type(item) == 'table' then
       if item.choice ~= nil then
-        item_type = enums.item.choice
+        item_type = NarratorEnums.item.choice
       elseif item.success ~= nil then
-        item_type = enums.item.condition
+        item_type = NarratorEnums.item.condition
       elseif item.var ~= nil then
-        item_type = enums.item.variable
+        item_type = NarratorEnums.item.variable
       elseif item.alts ~= nil then
-        item_type = enums.item.alts
+        item_type = NarratorEnums.item.alts
       end
     end
 
     -- Go deep
     if index == deep_index then
-      if item_type == enums.item.choice and item.node ~= nil then
+      if item_type == NarratorEnums.item.choice and item.node ~= nil then
         -- Go deep to the choice node
-        mode = enums.read_mode.gathers
+        mode = NarratorEnums.read_mode.gathers
         mode = self:read_items(item.node, path, depth + 1) or mode
 
-      elseif item_type == enums.item.condition then
+      elseif item_type == NarratorEnums.item.condition then
         -- Go deep to the condition node
         local chain_value = chain[depth + 2]
         local is_success = chain_value:sub(1, 1) == 't'
@@ -492,41 +504,41 @@ function story:read_items(items, path, depth, mode, current_index)
         mode = self:read_items(node, path, depth + 2, mode) or mode
       end
 
-      if item_type == enums.item.condition or item_type == enums.item.choice then
-        mode = mode ~= enums.read_mode.quit and enums.read_mode.gathers or mode
+      if item_type == NarratorEnums.item.condition or item_type == NarratorEnums.item.choice then
+        mode = mode ~= NarratorEnums.read_mode.quit and NarratorEnums.read_mode.gathers or mode
         skip = true
       end
     end
 
     -- Check the situation
-    if mode == enums.read_mode.choices and item_type ~= enums.item.choice then
-      mode = enums.read_mode.quit
+    if mode == NarratorEnums.read_mode.choices and item_type ~= NarratorEnums.item.choice then
+      mode = NarratorEnums.read_mode.quit
       skip = true
-    elseif mode == enums.read_mode.gathers and item_type == enums.item.choice then
+    elseif mode == NarratorEnums.read_mode.gathers and item_type == NarratorEnums.item.choice then
       skip = true
     end
 
     -- Read the item
     if skip then
       -- skip
-    elseif item_type == enums.item.text then
-      mode = enums.read_mode.text
+    elseif item_type == NarratorEnums.item.text then
+      mode = NarratorEnums.read_mode.text
       local safe_item = type(item) == 'string' and { text = item } or item
       mode = self:read_text(safe_item, context) or mode
-    elseif item_type == enums.item.alts then
-      mode = enums.read_mode.text
+    elseif item_type == NarratorEnums.item.alts then
+      mode = NarratorEnums.read_mode.text
       local deep_path = make_deep_path({ index }, '~')
       mode = self:read_alts(item, deep_path, depth + 1, mode) or mode
-    elseif item_type == enums.item.choice and self:check_condition(item.condition) then
-      mode = enums.read_mode.choices
+    elseif item_type == NarratorEnums.item.choice and self:check_condition(item.condition) then
+      mode = NarratorEnums.read_mode.choices
       local deep_path = make_deep_path({ index }, '>')
       deep_path.label = item.label or deep_path.label
       mode = self:read_choice(item, deep_path) or mode
 
       if index == #items and type(chain[#chain]) == 'number' then
-        mode = enums.read_mode.quit
+        mode = NarratorEnums.read_mode.quit
       end
-    elseif item_type == enums.item.condition then
+    elseif item_type == NarratorEnums.item.condition then
       local result, chain_value
 
       if type(item.condition) == 'string' then
@@ -540,24 +552,24 @@ function story:read_items(items, path, depth, mode, current_index)
       end
 
       if type(result) == 'string' then
-        mode = enums.read_mode.text
+        mode = NarratorEnums.read_mode.text
         mode = self:read_text({ text = result }, context) or mode
       elseif type(result) == 'table' then
         local deep_path = make_deep_path({ index, chain_value })
         mode = self:read_items(result, deep_path, depth + 2, mode) or mode
       end
-    elseif item_type == enums.item.variable then
+    elseif item_type == NarratorEnums.item.variable then
       self:assign_value_to(item.var, item.value, item.temp)
     end
 
     -- Read the label
-    if item.label ~= nil and item_type ~= enums.item.choice and not skip then
+    if item.label ~= nil and item_type ~= NarratorEnums.item.choice and not skip then
       local label_path = lume.clone(path)
       label_path.label = item.label
       self:visit(label_path)
     end
 
-    if mode == enums.read_mode.quit then
+    if mode == NarratorEnums.read_mode.quit then
       break
     end
   end
@@ -628,10 +640,10 @@ function story:read_text(item, context)
     local mode = self:jump_path(item.divert.path)
 
     if item.divert.tunnel then
-      return (mode == enums.read_mode.quit and #self.choices == 0) and enums.read_mode.text or mode
+      return (mode == NarratorEnums.read_mode.quit and #self.choices == 0) and NarratorEnums.read_mode.text or mode
     end
 
-    return enums.read_mode.quit
+    return NarratorEnums.read_mode.quit
   end
 
   if item.exit then
@@ -641,14 +653,14 @@ function story:read_text(item, context)
 
       if context.items == nil then
         self:read_path(context.path)
-        return enums.read_mode.quit
+        return NarratorEnums.read_mode.quit
       end
 
       self:read_items(context.items, context.path, context.depth, context.mode, context.index)
-      return enums.read_mode.quit
+      return NarratorEnums.read_mode.quit
     end
 
-    return enums.read_mode.text
+    return NarratorEnums.read_mode.text
   end
 end
 
@@ -657,9 +669,9 @@ function story:read_alts(item, path, depth, mode)
   assert(item.alts, 'Alternatives can\'t be nil')
   local alts = lume.clone(item.alts)
 
-  local sequence = item.sequence or enums.sequence.stopping
+  local sequence = item.sequence or NarratorEnums.sequence.stopping
   if type(sequence) == 'string' then
-    sequence = enums.sequence[item.sequence]
+    sequence = NarratorEnums.sequence[item.sequence]
   end
 
   self:visit(path)
@@ -680,12 +692,12 @@ function story:read_alts(item, path, depth, mode)
     end
   end
 
-  if sequence == enums.sequence.cycle then
+  if sequence == NarratorEnums.sequence.cycle then
     index = visits % #alts
     index = index > 0 and index or #alts
-  elseif sequence == enums.sequence.stopping then
+  elseif sequence == NarratorEnums.sequence.stopping then
     index = visits < #alts and visits or #alts
-  elseif sequence == enums.sequence.once then
+  elseif sequence == NarratorEnums.sequence.once then
     index = visits
   end
 
@@ -714,7 +726,7 @@ function story:read_choice(item, path)
       end
     end
 
-    return enums.read_mode.quit
+    return NarratorEnums.read_mode.quit
   end
 
   local title = self:replace_expressions(item.choice)
@@ -815,6 +827,30 @@ function story:do_expression(expression)
 
   -- Replace functions results
   expression = expression:gsub('[%a_][%w_]*%b()', function(match)
+    local holder = {}
+    holder.functionName = match:match('([%a_][%w_]*)%(')
+    local paramsString = match:match('[%a_][%w_]*%((.+)%)')
+    if paramsString ~= nil then
+      holder.params = lume.split(paramsString, ',')
+    else
+      holder.params = nil
+    end
+
+    for i, p in ipairs(holder.params) do
+      if holder.params[i]:find('["]') then 
+        local s = p:sub(2,#p)
+        s = s:sub(1,#s-1)
+        holder.params[i] = s
+      else
+        holder.params[i] = lume.serialize(p)
+      end
+    end
+
+    return self:execute_function(holder.functionName, table.unpack(holder.params))
+    --[==[
+    
+    
+    
     local func_name = match:match('([%a_][%w_]*)%(')
     local params_string = match:match('[%a_][%w_]*%((.+)%)')
     local params = params_string ~= nil and lume.map(lume.split(params_string, ','), lume.trim) or nil
@@ -863,7 +899,7 @@ function story:do_expression(expression)
       end
 
       return self.return_value
-    end
+    end ]==]--
   end)
 
   -- Replace lists
@@ -935,11 +971,30 @@ function story:do_expression(expression)
     end
   end
 
-  code = code .. 'return ' .. expression
-  return lume.dostring(code), stack
+  return self:manualExpression(expression)
+  
+  --code = code .. 'return ' .. expression
+  --return lume.dostring(code), stack
 end
 
+-- Manual Expression checking
+function story:manualExpression(code)
+  
+  -- Mathematical conditions
+  if code:match('(==)') or code:match('(~=)') or code:match('(>=)') or code:match('(<=)') or code:match('(>)') or code:match('(<)') then
+    local expression = {}
+    for w in code:gmatch("([^%s]+)") do table.insert(expression,w) end
+    if expression[2] == "==" then return (tonumber(expression[1]) == tonumber(expression[3])), {}
+      elseif expression[2] == "~=" then return (tonumber(expression[1]) ~= tonumber(expression[3])), {}
+      elseif expression[2] == ">=" then return (tonumber(expression[1]) >= tonumber(expression[3])), {}
+      elseif expression[2] == "<=" then return (tonumber(expression[1]) <= tonumber(expression[3])), {}
+      elseif expression[2] == ">" then return (tonumber(expression[1]) > tonumber(expression[3])), {}
+      elseif expression[2] == "<" then return (tonumber(expression[1]) < tonumber(expression[3])), {}
+    end
+  end
 
+  return code
+end
 -- Variables
 
 ---@private

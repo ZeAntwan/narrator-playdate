@@ -1,12 +1,16 @@
-local lume = require('narrator.libs.lume')
-local enums = require('narrator.enums')
-local parser = require('narrator.parser')
-local Story = require('narrator.story')
+--
+-- Dependencies
+import "CoreLibs/object"
+
+import 'narrator/libs/lume'
+import 'narrator/enums'
+import 'narrator/parser'
+import 'narrator/story'
 
 --
 -- Local
 
-local folder_separator = package.config:sub(1, 1)
+local folderSeparator = "/"
 
 ---Clear path from '.lua' and '.ink' extensions and replace '.' to '/' or '\'
 ---@param path string
@@ -89,8 +93,8 @@ end
 
 --
 -- Public
-
-local narrator = { }
+class('narrator').extends()
+--local Narrator = { }
 
 ---Parse a book from an Ink file
 ---Use it during development, but prefer already parsed and stored books in production
@@ -144,7 +148,7 @@ end
 ---@param book Narrator.Book
 ---@return Narrator.Story
 function narrator.init_story(book)
-  return Story(book)
+  return story(book)
 end
 
-return narrator
+return Narrator

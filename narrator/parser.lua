@@ -1,5 +1,8 @@
-local lume = require('narrator.libs.lume')
-local enums = require('narrator.enums')
+--
+-- Dependencies
+
+import 'narrator/libs/lume'
+import 'narrator/enums'
 
 --
 -- LPeg

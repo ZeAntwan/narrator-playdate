@@ -7,16 +7,16 @@
 -- the terms of the MIT license. See LICENSE for details.
 --
 
+class('NarratorObject').extends(Object)
+local NarratorObject = {}
+NarratorObject.__index = NarratorObject
 
-local Object = {}
-Object.__index = Object
 
-
-function Object:new()
+function NarratorObject:new()
 end
 
 
-function Object:extend()
+function NarratorObject:extend()
   local cls = {}
   for k, v in pairs(self) do
     if k:find("__") == 1 then
@@ -30,7 +30,7 @@ function Object:extend()
 end
 
 
-function Object:implement(...)
+function NarratorObject:implement(...)
   for _, cls in pairs({...}) do
     for k, v in pairs(cls) do
       if self[k] == nil and type(v) == "function" then
@@ -41,7 +41,7 @@ function Object:implement(...)
 end
 
 
-function Object:is(T)
+function NarratorObject:is(T)
   local mt = getmetatable(self)
   while mt do
     if mt == T then
@@ -53,16 +53,16 @@ function Object:is(T)
 end
 
 
-function Object:__tostring()
-  return "Object"
+function NarratorObject:__tostring()
+  return "NarratorObject"
 end
 
 
-function Object:__call(...)
+function NarratorObject:__call(...)
   local obj = setmetatable({}, self)
   obj:new(...)
   return obj
 end
 
 
-return Object
+return NarratorObject

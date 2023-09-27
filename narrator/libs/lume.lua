@@ -21,8 +21,8 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 -- SOFTWARE.
 --
-
-local lume = { _version = "2.3.0" }
+class('lume').extends()
+--local lume = { _version = "2.3.0" }
 
 local pairs, ipairs = pairs, ipairs
 local type, assert, unpack = type, assert, unpack or table.unpack
@@ -671,7 +671,8 @@ end
 
 
 function lume.dostring(str)
-  return assert((loadstring or load)(str))()
+  print("Playdate cannot execut functions this way")
+  return nil
 end
 
 

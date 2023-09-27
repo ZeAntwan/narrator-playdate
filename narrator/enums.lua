@@ -1,4 +1,6 @@
-local enums = {
+--
+-- NarratorEnums
+NarratorEnums = {
 
   ---Bump it when the state structure is changed
   engine_version = 2,

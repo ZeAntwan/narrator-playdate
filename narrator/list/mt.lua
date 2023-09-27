@@ -1,12 +1,12 @@
 --
 -- Dependencies
 
-local lume = require('narrator.libs.lume')
+import 'narrator/libs/lume'
 
 --
 -- Metatable
-
-local mt = { lists = { } }
+class('mt').extends(NarratorObject)
+--local mt = { lists = { } }
 
 function mt.__tostring(self)
   local pool = { }
