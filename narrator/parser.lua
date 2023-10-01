@@ -1,8 +1,8 @@
 --
 -- Dependencies
 
-import 'narrator/libs/lume'
-import 'narrator/enums'
+import 'libs/lume'
+import 'enums'
 
 --
 -- LPeg

@@ -2,10 +2,10 @@
 -- Dependencies
 import "CoreLibs/object"
 
-import 'narrator/libs/lume'
-import 'narrator/enums'
-import 'narrator/parser'
-import 'narrator/story'
+import 'libs/lume'
+import 'enums'
+import 'parser'
+import 'story'
 
 --
 -- Local

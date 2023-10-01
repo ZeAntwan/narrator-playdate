@@ -1,7 +1,7 @@
 --
 -- Dependencies
 
-import 'narrator/libs/lume'
+import 'libs/lume'
 
 --
 -- Metatable

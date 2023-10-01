@@ -1,11 +1,19 @@
-![logo](https://user-images.githubusercontent.com/4752473/85455900-141f8f80-b5a7-11ea-8cd7-b441d662b361.png)
+![logo](banner.png)
 
-# Narrator
+# Narrator-Playdate
+## DISCLAIMER
+Please consider this port alpha and not release proof. 
+
+Not all of the features have been tested ***yet***.
+
+I am using this for a project of my own, and once I manage to finish it and fully test this port, I'll update the repo here to reflect the update.
+
 [![Release](https://img.shields.io/github/v/release/zeantwan/narrator-playdate.svg?include_prereleases=&sort=semver&color=blue)](https://github.com/astrochili/narrator/releases)
 [![License](https://img.shields.io/badge/License-MIT-blue)](https://github.com/astrochili/narrator/blob/master/LICENSE)
 [![Toybox Compatible](https://img.shields.io/badge/toybox.py-compatible-brightgreen)](https://toyboxpy.io)
+[![Mastodon](https://img.shields.io/badge/mastodon-gray?&logo=mastodon)](https://peoplemaking.games/@zeantwan)
 
-Original Repo
+### Support the original plugin author here:
 
 [![Website](https://img.shields.io/badge/website-gray.svg?&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxNiIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDE4IDE2Ij48Y2lyY2xlIGN4PSIzLjY2IiBjeT0iMTQuNzUiIHI9IjEuMjUiIGZpbGw9InVybCgjYSkiLz48Y2lyY2xlIGN4PSI4LjY2IiBjeT0iMTQuNzUiIHI9IjEuMjUiIGZpbGw9InVybCgjYikiLz48Y2lyY2xlIGN4PSIxMy42NSIgY3k9IjE0Ljc1IiByPSIxLjI1IiBmaWxsPSJ1cmwoI2MpIi8+PHBhdGggZmlsbD0idXJsKCNkKSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNy42MyAxLjQ4Yy41LS43IDEuNTUtLjcgMi4wNSAwbDYuMjIgOC44MWMuNTguODMtLjAxIDEuOTctMS4wMyAxLjk3SDIuNDRhMS4yNSAxLjI1IDAgMCAxLTEuMDItMS45N2w2LjIxLTguODFaIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImEiIHgxPSIyLjQxIiB4Mj0iMi40MSIgeTE9IjEzLjUiIHkyPSIxNiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIHN0b3AtY29sb3I9IiNGRDhENDIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNGOTU0MUYiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iYiIgeDE9IjcuNDEiIHgyPSI3LjQxIiB5MT0iMTMuNSIgeTI9IjE2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agc3RvcC1jb2xvcj0iI0ZEOEQ0MiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0Y5NTQxRiIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJjIiB4MT0iMTIuNCIgeDI9IjEyLjQiIHkxPSIxMy41IiB5Mj0iMTYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBzdG9wLWNvbG9yPSIjRkQ4RDQyIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjRjk1NDFGIi8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImQiIHgxPSIuMDMiIHgyPSIuMDMiIHkxPSIuMDMiIHkyPSIxMi4yNiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIHN0b3AtY29sb3I9IiNGRkU2NUUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNGRkM4MzAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48L3N2Zz4=)](https://astronachos.com/)
 [![Mastodon](https://img.shields.io/badge/mastodon-gray?&logo=mastodon)](https://mastodon.gamedev.place/@astronachos)
@@ -28,9 +36,9 @@ Narrator allows to convert raw Ink scripts to the book (a lua table) and play it
 
 Due to Playdate Hardware limitation (and also my own technical limitations), the Playdate or Playdate Simulator cannot parse an Ink file using lpeg.
 
-For this library to work, you will need to parse and output the file in another way.
+For this library to work, you will need to parse and output the file in another way. 
 
-This repo contains a basic Defold project that can do that for you, but you can also create a very simple lua script using the original repo using this
+There is definitly a simple Lua script that you can run on your machin to do that, but because I can't manage to run "normal" lua, this repo contains a basic Defold project that can do that for you, but you can also create a very simple lua script using the original repo using this snippet.
 
 ```lua
 local narrator = require('narrator.narrator')
@@ -159,25 +167,36 @@ end
 ## Installation
 
 ### Toybox.py
+You can add it to your Playdate project by installing toybox.py, going to your project folder in a Terminal window and typing:
+
+```
+toybox add https://github.com/ZeAntwan/narrator-playdate/
+toybox update
+```
+
+Then, if your code is in the source folder, just import the following:
+```lua
+import '../toyboxes/toyboxes.lua'
+```
 
 ### Manual
 
-### Parsing the ink file
-Because of the Playdate limitation, and also to save on memory cost, you have to process the ink file into a lua table outside of the playdate environement.
+Download this repo and unzip it at the root of your Playdate projet, and import is using
 
-For now, I have included a defold project that when opened and run will convert and output a lua file for you to drop in
-
-Feel free to suggest a better script that could make that process hassle free
+```lua
+import "narrator"
+```
 
 ## Documentation
 
 ### narrator.init_story(book)
 
-Inits a story instance from the book. This is aclual to use in production. For example, just load a book with `require()` and pass it to this function.
+Inits a story instance from the book. This is aclual to use in production. For example, just load a book with `import` and pass it to this function.
 
 ```lua
 -- Require a parsed and saved before book
-local book = require('stories.game')
+local book = 
+import "stories/game"
 
 -- Init a story instance
 local story = narrator.init_story(book)
@@ -422,33 +441,6 @@ story.migrate = migrate
 
 -- Load the game
 story:load_state(saved_state)
-```
-
-## Contribution
-
-### Development
-
-There are some useful extensions and configs for [VSCode](https://code.visualstudio.com/) that I use in development of Narrator.
-
-- [Local Lua Debugger](https://github.com/tomblind/local-lua-debugger-vscode) by [tomblind](https://github.com/tomblind/).
-- [Lua Language Server](https://github.com/sumneko/lua-language-server) by [sunmeko](https://github.com/sumneko).
-- A task named `Busted` runs tests with `tests/run.lua`.
-- A lunch configuration named `Busted` runs the debugger with `tests/run.lua`.
-- A lunch configuration named `Debug` runs the debugger with `debug.lua`.
-
-### Testing
-
-To run tests you need to install [busted](https://github.com/Olivine-Labs/busted).
-
-```shell
-$ luarocks install busted
-```
-
-Don't forget also to install `lpeg` as described in [Common case](#common-case-löve-pure-lua-etc) installation section.
-
-After that you can run tests from the terminal:
-```shell
-$ busted test/run.lua
 ```
 
 ## Third Party Libraries

@@ -1,0 +1,4 @@
+local narrator = require('narrator.narrator')
+
+-- Parse a book from the Ink file.
+local book = narrator.parse_file('game.ink', { save = true })
