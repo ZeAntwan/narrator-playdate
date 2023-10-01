@@ -179,10 +179,10 @@ import '../toyboxes/toyboxes.lua'
 
 ### Manual
 
-Download this repo and unzip it at the root of your Playdate projet, and import is using
+Download this repo and unzip it at the root of your Playdate projet, and (if your main.lua file in in the "source" folder as advised byt Playdated SDK) import is using
 
 ```lua
-import "narrator"
+import "../narrator/narrator"
 ```
 
 ## Documentation
