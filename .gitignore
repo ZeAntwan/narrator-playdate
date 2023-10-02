@@ -3,6 +3,6 @@
 Thumbs.db
 
 # Defold
-/.internal
-/build
+narrator/defold-parser/.internal
+narrator/defold-parser/build
 /.vscode
