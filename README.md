@@ -168,7 +168,7 @@ Also there is a list of [known limitations](https://github.com/astrochili/narrat
 You can add it to your Playdate project by installing toybox.py, going to your project folder in a Terminal window and typing:
 
 ```
-toybox add https://github.com/ZeAntwan/narrator-playdate/
+toybox add https://github.com/ZeAntwan/narrator-playdate
 toybox update
 ```
 
