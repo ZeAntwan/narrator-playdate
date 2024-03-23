@@ -38,7 +38,7 @@ Due to Playdate Hardware limitation (and also my own technical limitations), the
 
 For this library to work, you will need to parse and output the file in another way. 
 
-There is definitly a simple Lua script that you can run on your machin to do that, but because I can't manage to run "normal" lua, this repo contains a basic Defold project that can do that for you, but you can also create a very simple lua script using the original repo using this snippet.
+There is definitly a simple Lua script that you can run on your machine to do that, but because I can't manage to run "normal" lua, this repo contains a basic Defold project that can do that for you, but you can also create a very simple lua script using the original repo using this snippet.
 
 ```lua
 local narrator = require('narrator.narrator')
