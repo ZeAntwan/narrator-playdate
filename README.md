@@ -1,3 +1,9 @@
+# There's a better solution elsewhere!
+
+## While this is not going anywhere, due to my lack of skill to actually maintaing something of this scale, and because this is more of a hack than an actual think to use in production, I recommend cheking out [Tinta](https://github.com/smwhr/tinta)
+
+---
+
 ![logo](banner.png)
 
 # Narrator-Playdate
